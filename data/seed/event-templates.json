@@ -1,0 +1,317 @@
+{
+  "templates": [
+    {
+      "id": "tmpl_wool_price_drop",
+      "name": "Wool Price Decline",
+      "description": "Regional wool prices fall further, driven by competition from southern markets or a weak trading season. The Thursday market is quieter than usual. Traders depart early.",
+      "tags": ["TRADE", "TEXTILE", "GRIEVANCE"],
+      "magnitude": 2,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "economic.woolMarketPrice", "operator": "LT", "value": 55 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "economic.woolMarketPrice", "delta": -4, "propagationDelay": 0, "decayRate": 0.02 },
+        { "metricPath": "economic.tradeFlow", "delta": -3, "propagationDelay": 1, "decayRate": 0.015 },
+        { "metricPath": "economic.guildTension", "delta": 5, "propagationDelay": 2, "decayRate": 0.01 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 8,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_wool_price_recovery",
+      "name": "Wool Price Recovery",
+      "description": "Demand from Flemish cloth merchants lifts regional wool prices. The Thursday market draws traders from further afield. The Brenner family is visibly relieved.",
+      "tags": ["TRADE", "TEXTILE", "HOPE"],
+      "magnitude": 2,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "economic.woolMarketPrice", "operator": "LT", "value": 45 },
+        { "metricPath": "economic.tradeFlow", "operator": "GT", "value": 35 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "economic.woolMarketPrice", "delta": 6, "propagationDelay": 0, "decayRate": 0.01 },
+        { "metricPath": "economic.tradeFlow", "delta": 4, "propagationDelay": 1, "decayRate": 0.01 },
+        { "metricPath": "economic.guildTension", "delta": -3, "propagationDelay": 3, "decayRate": 0.02 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 12,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_press_publishes_prices",
+      "name": "Der Weidenbote Publishes Regional Price Comparison",
+      "description": "Voss prints a broadsheet comparing wool and grain prices across regional markets, revealing that Schafweide's traders are paying above-market rates. The broadsheet circulates among guild masters and council members. Questions are raised at the Thursday market.",
+      "tags": ["PRESS", "TRADE", "TEXTILE", "POLITICS"],
+      "magnitude": 2,
+      "origin": "DICE",
+      "conditions": [
+        { "metricPath": "infrastructure.pressOperationalStatus", "operator": "GT", "value": 40 },
+        { "metricPath": "economic.woolMarketPrice", "operator": "LT", "value": 50 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "social.informationSpread", "delta": 6, "propagationDelay": 1, "decayRate": 0.03 },
+        { "metricPath": "economic.guildTension", "delta": 7, "propagationDelay": 2, "decayRate": 0.015 },
+        { "metricPath": "political.councilLegitimacy", "delta": -4, "propagationDelay": 3, "decayRate": 0.01 },
+        { "metricPath": "infrastructure.pressOperationalStatus", "delta": 3, "propagationDelay": 0, "decayRate": 0 }
+      ],
+      "requiresNamedActor": true,
+      "cooldownTicks": 16,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_guild_dispute_surfaces",
+      "name": "Guild Dispute Surfaces Publicly",
+      "description": "Long-simmering tensions between two guild factions break into open dispute at the Thursday market. Accusations of price manipulation or market access violations are exchanged. The council is forced to intervene publicly.",
+      "tags": ["GUILD", "LABOR", "POLITICS", "GRIEVANCE", "CONFLICT"],
+      "magnitude": 2,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "economic.guildTension", "operator": "GT", "value": 60 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "economic.guildTension", "delta": 8, "propagationDelay": 0, "decayRate": 0.005 },
+        { "metricPath": "political.councilLegitimacy", "delta": -6, "propagationDelay": 2, "decayRate": 0.01 },
+        { "metricPath": "social.publicUnrest", "delta": 7, "propagationDelay": 1, "decayRate": 0.02 },
+        { "metricPath": "economic.tradeFlow", "delta": -4, "propagationDelay": 2, "decayRate": 0.02 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 20,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_church_sermon_unrest",
+      "name": "Monastery Issues Sermon on Civic Disorder",
+      "description": "The Abbot delivers a sermon addressing the town's moral character, obliquely criticizing commercial greed and civic discord. The sermon is well-attended. Its targets in the council know they are being addressed.",
+      "tags": ["RELIGION", "POLITICS", "FEAR"],
+      "magnitude": 2,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "social.publicUnrest", "operator": "GT", "value": 40 },
+        { "metricPath": "political.churchInfluence", "operator": "GT", "value": 50 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "social.publicUnrest", "delta": -8, "propagationDelay": 1, "decayRate": 0.02 },
+        { "metricPath": "political.churchInfluence", "delta": 4, "propagationDelay": 0, "decayRate": 0.005 },
+        { "metricPath": "political.councilLegitimacy", "delta": -5, "propagationDelay": 3, "decayRate": 0.01 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 12,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_church_targets_press",
+      "name": "Monastery Questions the Press",
+      "description": "A brother from the monastery visits Voss and formally requests to review upcoming broadsheet content before publication. The request is framed as pastoral concern. It is understood by everyone as something else.",
+      "tags": ["RELIGION", "PRESS", "POLITICS", "FEAR"],
+      "magnitude": 3,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "political.churchInfluence", "operator": "GT", "value": 60 },
+        { "metricPath": "social.informationSpread", "operator": "GT", "value": 20 },
+        { "metricPath": "infrastructure.pressOperationalStatus", "operator": "GT", "value": 50 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "infrastructure.pressOperationalStatus", "delta": -8, "propagationDelay": 1, "decayRate": 0.005 },
+        { "metricPath": "political.churchInfluence", "delta": 5, "propagationDelay": 0, "decayRate": 0.005 },
+        { "metricPath": "social.informationSpread", "delta": -5, "propagationDelay": 2, "decayRate": 0.02 }
+      ],
+      "requiresNamedActor": true,
+      "cooldownTicks": 24,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_wet_summer",
+      "name": "Wet Summer Damages Wool Yield",
+      "description": "An unusually wet summer reduces the quality and quantity of fleece from the surrounding flocks. Shepherds bring thinner, damper bales to the Thursday market. Brenner buyers accept them at reduced prices with visible displeasure.",
+      "tags": ["AGRICULTURE", "TEXTILE", "TRADE"],
+      "magnitude": 2,
+      "origin": "DICE",
+      "conditions": [
+        { "metricPath": "economic.woolMarketPrice", "operator": "GT", "value": 30 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "economic.woolMarketPrice", "delta": -7, "propagationDelay": 0, "decayRate": 0.008 },
+        { "metricPath": "economic.grainSupply", "delta": -5, "propagationDelay": 4, "decayRate": 0.01 },
+        { "metricPath": "economic.tradeFlow", "delta": -5, "propagationDelay": 2, "decayRate": 0.01 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 52,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_road_degrades",
+      "name": "Eastern Road Falls Into Disrepair",
+      "description": "The road connecting Schafweide to eastern markets develops significant ruts and flooding damage after a difficult season. Traders report losing goods to axle breaks. Some begin routing around the town entirely.",
+      "tags": ["INFRASTRUCTURE", "TRADE"],
+      "magnitude": 2,
+      "origin": "DICE",
+      "conditions": [
+        { "metricPath": "infrastructure.roadCondition", "operator": "GT", "value": 30 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "infrastructure.roadCondition", "delta": -10, "propagationDelay": 0, "decayRate": 0.003 },
+        { "metricPath": "economic.tradeFlow", "delta": -6, "propagationDelay": 3, "decayRate": 0.008 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 26,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_bridge_toll_dispute",
+      "name": "Hartmann Bridge Toll Dispute",
+      "description": "The Hartmann family raises bridge tolls citing maintenance costs. Traders protest to the council. The Kessler guild, which pays disproportionate tolls relative to its income, lodges a formal complaint. The Brenners stay conspicuously quiet.",
+      "tags": ["INFRASTRUCTURE", "TRADE", "POLITICS", "GRIEVANCE", "GUILD"],
+      "magnitude": 2,
+      "origin": "DICE",
+      "conditions": [
+        { "metricPath": "infrastructure.riverCrossingIntegrity", "operator": "GT", "value": 60 },
+        { "metricPath": "economic.guildTension", "operator": "GT", "value": 35 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "economic.guildTension", "delta": 9, "propagationDelay": 0, "decayRate": 0.01 },
+        { "metricPath": "political.councilLegitimacy", "delta": -5, "propagationDelay": 2, "decayRate": 0.01 },
+        { "metricPath": "economic.tradeFlow", "delta": -3, "propagationDelay": 1, "decayRate": 0.015 },
+        { "metricPath": "social.publicUnrest", "delta": 5, "propagationDelay": 2, "decayRate": 0.02 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 30,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_disease_outbreak",
+      "name": "Fever Moves Through the Wool Workers",
+      "description": "A seasonal fever spreads among the seasonal wool workers camped on the southern edge of town. Several die. Work slows at the Thursday market. The monastery distributes remedies and records the dead. The council does nothing officially.",
+      "tags": ["MEDICINE", "LABOR", "RELIGION", "FEAR"],
+      "magnitude": 3,
+      "origin": "DICE",
+      "conditions": [
+        { "metricPath": "social.populationHealth", "operator": "LT", "value": 65 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "social.populationHealth", "delta": -12, "propagationDelay": 0, "decayRate": 0.008 },
+        { "metricPath": "economic.tradeFlow", "delta": -7, "propagationDelay": 2, "decayRate": 0.01 },
+        { "metricPath": "social.publicUnrest", "delta": 8, "propagationDelay": 3, "decayRate": 0.015 },
+        { "metricPath": "political.churchInfluence", "delta": 5, "propagationDelay": 1, "decayRate": 0.005 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 40,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_literacy_uptick",
+      "name": "Small Literacy Uptick Among Artisan Class",
+      "description": "A small cohort of artisan-class residents — mostly younger sons of guild families with no inheritance prospects — begin learning to read, drawn by the practical utility of Der Weidenbote's market reports. The monastery notices. Voss notices too.",
+      "tags": ["PRESS", "LABOR", "GUILD", "HOPE"],
+      "magnitude": 1,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "infrastructure.pressOperationalStatus", "operator": "GT", "value": 50 },
+        { "metricPath": "social.literacyRate", "operator": "LT", "value": 25 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "social.literacyRate", "delta": 2, "propagationDelay": 8, "decayRate": 0 },
+        { "metricPath": "social.informationSpread", "delta": 3, "propagationDelay": 4, "decayRate": 0.005 },
+        { "metricPath": "political.churchInfluence", "delta": -2, "propagationDelay": 12, "decayRate": 0.003 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 20,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_council_mediates_guilds",
+      "name": "Council Mediates Guild Dispute",
+      "description": "The council convenes a formal session to address guild tensions. A compromise is brokered — or rather, imposed by the Brenners in terms favorable to themselves. The Kesslers accept publicly and resent privately. Tension drops but does not resolve.",
+      "tags": ["POLITICS", "GUILD", "LAW"],
+      "magnitude": 2,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "economic.guildTension", "operator": "GT", "value": 65 },
+        { "metricPath": "political.councilLegitimacy", "operator": "GT", "value": 45 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "economic.guildTension", "delta": -12, "propagationDelay": 1, "decayRate": 0.005 },
+        { "metricPath": "political.councilLegitimacy", "delta": 4, "propagationDelay": 2, "decayRate": 0.01 },
+        { "metricPath": "social.publicUnrest", "delta": -5, "propagationDelay": 2, "decayRate": 0.02 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 16,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_imperial_tax_demand",
+      "name": "Imperial Tax Collector Arrives",
+      "description": "A representative of the Holy Roman Emperor arrives in Schafweide demanding back-payment of imperial market taxes the council has quietly deferred for two seasons. The visit is unexpected. The council scrambles to produce funds without appearing financially distressed.",
+      "tags": ["POLITICS", "TRADE", "LAW", "FEAR"],
+      "magnitude": 3,
+      "origin": "DICE",
+      "conditions": [
+        { "metricPath": "political.imperialAuthority", "operator": "GT", "value": 35 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "political.imperialAuthority", "delta": 8, "propagationDelay": 0, "decayRate": 0.008 },
+        { "metricPath": "political.councilLegitimacy", "delta": -7, "propagationDelay": 2, "decayRate": 0.01 },
+        { "metricPath": "economic.tradeFlow", "delta": -5, "propagationDelay": 3, "decayRate": 0.015 },
+        { "metricPath": "social.publicUnrest", "delta": 6, "propagationDelay": 2, "decayRate": 0.02 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 52,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_voss_pressured",
+      "name": "Voss Receives Formal Pressure to Cease Publication",
+      "description": "Heinrich Voss receives a formal letter — signed by two of the three council families — requesting that Der Weidenbote cease publishing market price comparisons that embarrass Schafweide's trading arrangements. The letter is politely worded. The threat beneath the politeness is clear.",
+      "tags": ["PRESS", "POLITICS", "TRADE", "FEAR", "CONFLICT"],
+      "magnitude": 3,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "economic.guildTension", "operator": "GT", "value": 55 },
+        { "metricPath": "social.informationSpread", "operator": "GT", "value": 25 },
+        { "metricPath": "infrastructure.pressOperationalStatus", "operator": "GT", "value": 50 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "infrastructure.pressOperationalStatus", "delta": -12, "propagationDelay": 1, "decayRate": 0.003 },
+        { "metricPath": "social.informationSpread", "delta": -4, "propagationDelay": 2, "decayRate": 0.02 },
+        { "metricPath": "political.councilLegitimacy", "delta": 3, "propagationDelay": 3, "decayRate": 0.01 }
+      ],
+      "requiresNamedActor": true,
+      "cooldownTicks": 30,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_good_harvest",
+      "name": "Strong Harvest Season",
+      "description": "A dry, warm summer produces an abundant grain harvest from the surrounding farmland. Food prices stabilize. The seasonal workers arrive in better spirits than usual. The monastery gives thanks publicly.",
+      "tags": ["AGRICULTURE", "HOPE", "RELIGION"],
+      "magnitude": 1,
+      "origin": "SEASONAL",
+      "conditions": [
+        { "metricPath": "social.populationHealth", "operator": "GT", "value": 45 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "economic.grainSupply", "delta": 10, "propagationDelay": 0, "decayRate": 0.005 },
+        { "metricPath": "social.populationHealth", "delta": 5, "propagationDelay": 2, "decayRate": 0.005 },
+        { "metricPath": "social.publicUnrest", "delta": -4, "propagationDelay": 3, "decayRate": 0.02 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 52,
+      "lastFiredTick": null
+    }
+  ]
+}

@@ -1,0 +1,420 @@
+{
+  "cityName": "Schafweide",
+  "settingDescription": "A market town of roughly 2,400 souls in the foothills east of the Rhine. Grown from grazing settlements around a river crossing, Schafweide rose to regional significance on the back of its wool trade. The weekly Thursday market on the Marktplatz is its heartbeat. Three guild families — the Brenners, the Kesslers, and the Hartmanns — govern through a council that presents unity while nursing quiet rivalries. A monastery on the hill above the Marktplatz holds the town's literacy and its conscience. Six months ago, a printing press arrived.",
+  "startYear": 1467,
+  "startWeek": 14,
+  "currentTick": 0,
+  "inWorldDate": "April, 1467",
+
+  "initialMetrics": {
+    "economic": {
+      "grainSupply": 62,
+      "tradeFlow": 40,
+      "guildTension": 44,
+      "woolMarketPrice": 41
+    },
+    "political": {
+      "imperialAuthority": 45,
+      "churchInfluence": 67,
+      "councilLegitimacy": 61,
+      "legalStability": 58
+    },
+    "social": {
+      "publicUnrest": 28,
+      "literacyRate": 7,
+      "informationSpread": 12,
+      "populationHealth": 55
+    },
+    "infrastructure": {
+      "pressOperationalStatus": 54,
+      "roadCondition": 49,
+      "riverCrossingIntegrity": 71
+    }
+  },
+
+  "institutions": [
+    {
+      "id": "inst_der_weidenbote",
+      "name": "Der Weidenbote",
+      "type": "PRESS",
+      "status": "ACTIVE",
+      "foundedTick": -26,
+      "influence": 18,
+      "stability": 31,
+      "publicTrust": 44,
+      "resources": 22,
+      "metricInfluences": [
+        {
+          "metricPath": "social.informationSpread",
+          "weight": 0.6,
+          "propagationDelay": 1
+        },
+        {
+          "metricPath": "social.literacyRate",
+          "weight": 0.15,
+          "propagationDelay": 52
+        },
+        {
+          "metricPath": "political.councilLegitimacy",
+          "weight": -0.1,
+          "propagationDelay": 4
+        },
+        {
+          "metricPath": "political.churchInfluence",
+          "weight": -0.08,
+          "propagationDelay": 8
+        },
+        {
+          "metricPath": "economic.tradeFlow",
+          "weight": 0.12,
+          "propagationDelay": 3
+        }
+      ],
+      "relationships": {
+        "inst_wool_guild": 15,
+        "inst_monastery": -12,
+        "inst_council": 8,
+        "inst_tanners_guild": 5,
+        "inst_hartmann_mill": 3
+      },
+      "currentLeaderPoiId": "poi_heinrich_voss",
+      "significantSieveEntries": ["sieve_press_arrival"]
+    },
+    {
+      "id": "inst_monastery",
+      "name": "Monastery of Saint Aegidius",
+      "type": "RELIGIOUS_ORDER",
+      "status": "ACTIVE",
+      "foundedTick": -2080,
+      "influence": 71,
+      "stability": 78,
+      "publicTrust": 69,
+      "resources": 61,
+      "metricInfluences": [
+        {
+          "metricPath": "political.churchInfluence",
+          "weight": 0.7,
+          "propagationDelay": 0
+        },
+        {
+          "metricPath": "social.literacyRate",
+          "weight": 0.25,
+          "propagationDelay": 104
+        },
+        {
+          "metricPath": "social.publicUnrest",
+          "weight": -0.2,
+          "propagationDelay": 2
+        },
+        {
+          "metricPath": "political.legalStability",
+          "weight": 0.15,
+          "propagationDelay": 3
+        }
+      ],
+      "relationships": {
+        "inst_council": 22,
+        "inst_wool_guild": 14,
+        "inst_der_weidenbote": -12,
+        "inst_tanners_guild": -8
+      },
+      "currentLeaderPoiId": null,
+      "significantSieveEntries": ["sieve_monastery_founding"]
+    },
+    {
+      "id": "inst_council",
+      "name": "The Council of Schafweide",
+      "type": "GOVERNING_COUNCIL",
+      "status": "ACTIVE",
+      "foundedTick": -780,
+      "influence": 64,
+      "stability": 61,
+      "publicTrust": 55,
+      "resources": 58,
+      "metricInfluences": [
+        {
+          "metricPath": "political.councilLegitimacy",
+          "weight": 0.65,
+          "propagationDelay": 0
+        },
+        {
+          "metricPath": "political.legalStability",
+          "weight": 0.4,
+          "propagationDelay": 1
+        },
+        {
+          "metricPath": "social.publicUnrest",
+          "weight": -0.25,
+          "propagationDelay": 2
+        },
+        {
+          "metricPath": "economic.tradeFlow",
+          "weight": 0.2,
+          "propagationDelay": 4
+        }
+      ],
+      "relationships": {
+        "inst_monastery": 22,
+        "inst_wool_guild": 41,
+        "inst_tanners_guild": 18,
+        "inst_hartmann_mill": 35,
+        "inst_der_weidenbote": 8
+      },
+      "currentLeaderPoiId": null,
+      "significantSieveEntries": ["sieve_council_founding"]
+    },
+    {
+      "id": "inst_wool_guild",
+      "name": "The Brenner Wool Guild",
+      "type": "GUILD",
+      "status": "ACTIVE",
+      "foundedTick": -1040,
+      "influence": 58,
+      "stability": 66,
+      "publicTrust": 51,
+      "resources": 63,
+      "metricInfluences": [
+        {
+          "metricPath": "economic.woolMarketPrice",
+          "weight": 0.55,
+          "propagationDelay": 1
+        },
+        {
+          "metricPath": "economic.tradeFlow",
+          "weight": 0.4,
+          "propagationDelay": 2
+        },
+        {
+          "metricPath": "economic.guildTension",
+          "weight": 0.2,
+          "propagationDelay": 3
+        },
+        {
+          "metricPath": "political.councilLegitimacy",
+          "weight": 0.15,
+          "propagationDelay": 4
+        }
+      ],
+      "relationships": {
+        "inst_council": 41,
+        "inst_monastery": 14,
+        "inst_tanners_guild": -22,
+        "inst_hartmann_mill": 11,
+        "inst_der_weidenbote": 15
+      },
+      "currentLeaderPoiId": null,
+      "significantSieveEntries": ["sieve_wool_guild_founding"]
+    },
+    {
+      "id": "inst_tanners_guild",
+      "name": "The Kessler Tanners Guild",
+      "type": "GUILD",
+      "status": "ACTIVE",
+      "foundedTick": -910,
+      "influence": 38,
+      "stability": 54,
+      "publicTrust": 32,
+      "resources": 44,
+      "metricInfluences": [
+        {
+          "metricPath": "economic.guildTension",
+          "weight": 0.35,
+          "propagationDelay": 2
+        },
+        {
+          "metricPath": "economic.tradeFlow",
+          "weight": 0.15,
+          "propagationDelay": 3
+        },
+        {
+          "metricPath": "social.publicUnrest",
+          "weight": 0.12,
+          "propagationDelay": 4
+        }
+      ],
+      "relationships": {
+        "inst_council": 18,
+        "inst_wool_guild": -22,
+        "inst_hartmann_mill": -31,
+        "inst_monastery": -8,
+        "inst_der_weidenbote": 5
+      },
+      "currentLeaderPoiId": null,
+      "significantSieveEntries": ["sieve_tanners_guild_founding"]
+    },
+    {
+      "id": "inst_hartmann_mill",
+      "name": "The Hartmann Mill and River Crossing",
+      "type": "INFRASTRUCTURE",
+      "status": "ACTIVE",
+      "foundedTick": -650,
+      "influence": 52,
+      "stability": 74,
+      "publicTrust": 47,
+      "resources": 67,
+      "metricInfluences": [
+        {
+          "metricPath": "infrastructure.riverCrossingIntegrity",
+          "weight": 0.8,
+          "propagationDelay": 0
+        },
+        {
+          "metricPath": "economic.tradeFlow",
+          "weight": 0.35,
+          "propagationDelay": 1
+        },
+        {
+          "metricPath": "economic.grainSupply",
+          "weight": 0.2,
+          "propagationDelay": 2
+        }
+      ],
+      "relationships": {
+        "inst_council": 35,
+        "inst_wool_guild": 11,
+        "inst_tanners_guild": -31,
+        "inst_monastery": 8,
+        "inst_der_weidenbote": 3
+      },
+      "currentLeaderPoiId": null,
+      "significantSieveEntries": ["sieve_river_crossing_built"]
+    }
+  ],
+
+  "personsOfInterest": [
+    {
+      "id": "poi_heinrich_voss",
+      "name": "Heinrich Voss",
+      "role": "Printer and proprietor of Der Weidenbote",
+      "institutionalAffiliations": ["inst_der_weidenbote"],
+      "health": 74,
+      "wealth": 31,
+      "influence": 24,
+      "approximateBirthYear": 1431,
+      "approximateLifeExpectancy": 58,
+      "relationships": {
+        "inst_wool_guild": 15,
+        "inst_monastery": -18,
+        "inst_council": 12,
+        "inst_tanners_guild": 8,
+        "inst_hartmann_mill": 4
+      },
+      "promotionTick": -26,
+      "promotionTrigger": "HYBRID",
+      "promotionSieveEntryId": "sieve_press_arrival",
+      "centralityScoreAtPromotion": 4,
+      "currentCentralityScore": 4,
+      "significanceThreshold": 2,
+      "ticksBelowThreshold": 0,
+      "status": "ACTIVE",
+      "demotionTick": null,
+      "demotionSieveEntryId": null,
+      "significantSieveEntries": ["sieve_press_arrival"]
+    }
+  ],
+
+  "initialSieveEntries": [
+    {
+      "id": "sieve_monastery_founding",
+      "tick": -2080,
+      "inWorldDate": "Circa 1027",
+      "description": "The Benedictine brothers of Saint Aegidius established a monastery on the hill above what would become the Marktplatz, drawn by the river crossing and the sparse settlement of shepherds already gathered there. The brothers brought literacy, record-keeping, and the first permanent stone structure in the region.",
+      "summary": "Monastery of Saint Aegidius founded on the hill above Schafweide by Benedictine brothers.",
+      "fragment": "The monastery predates the town itself.",
+      "currentFidelity": "FRAGMENT",
+      "tags": ["RELIGION", "FOUNDING", "SACRED"],
+      "magnitude": 4,
+      "institutionRefs": ["inst_monastery"],
+      "poiRefs": [],
+      "locationRef": "monastery_hill",
+      "causedBy": [],
+      "caused": ["sieve_council_founding", "sieve_wool_guild_founding"],
+      "embedding": null
+    },
+    {
+      "id": "sieve_wool_guild_founding",
+      "tick": -1040,
+      "inWorldDate": "Circa 1027",
+      "description": "The Brenner family formalized the Thursday wool market into a chartered guild, securing regional trading rights from the local imperial administrator. The charter gave the Brenners legal precedence over wool pricing and market access — an authority they have held, and quietly expanded, ever since.",
+      "summary": "Brenner family chartered the Wool Guild, securing regional trading rights.",
+      "fragment": "The Brenner Wool Guild charter predates the council by two generations.",
+      "currentFidelity": "FRAGMENT",
+      "tags": ["TRADE", "TEXTILE", "FOUNDING", "LAW", "GUILD"],
+      "magnitude": 3,
+      "institutionRefs": ["inst_wool_guild", "inst_council"],
+      "poiRefs": [],
+      "locationRef": "marktplatz",
+      "causedBy": ["sieve_monastery_founding"],
+      "caused": ["sieve_council_founding"],
+      "embedding": null
+    },
+    {
+      "id": "sieve_tanners_guild_founding",
+      "tick": -910,
+      "inWorldDate": "Circa 1027",
+      "description": "The Kessler family established the Tanners Guild following a prolonged dispute with the Brenners over market stall placement. The tanners' trade — considered unehrlich by many for its association with dead animals and foul-smelling processes — was granted a secondary charter with restricted market access. The Kesslers have never forgotten the subordinate terms of their founding.",
+      "summary": "Kessler Tanners Guild founded under restricted charter following dispute with Brenner Wool Guild. The tanners' unehrlich status embedded into founding terms.",
+      "fragment": "The Kessler guild was founded in grievance and has operated in it ever since.",
+      "currentFidelity": "FRAGMENT",
+      "tags": ["TRADE", "LABOR", "FOUNDING", "GRIEVANCE", "GUILD"],
+      "magnitude": 3,
+      "institutionRefs": ["inst_tanners_guild", "inst_wool_guild"],
+      "poiRefs": [],
+      "locationRef": "marktplatz",
+      "causedBy": ["sieve_wool_guild_founding"],
+      "caused": [],
+      "embedding": null
+    },
+    {
+      "id": "sieve_river_crossing_built",
+      "tick": -650,
+      "inWorldDate": "Circa 1027",
+      "description": "The Hartmann family financed and built a permanent stone bridge over the river crossing that had previously been a seasonal ford. By controlling the only reliable crossing in the region, the Hartmanns secured a toll revenue stream and a stranglehold on commerce entering and leaving Schafweide from the east.",
+      "summary": "Hartmann family built permanent stone bridge, securing toll revenue and commercial chokehold on eastern trade routes.",
+      "fragment": "The Hartmann bridge is the reason Schafweide grew and the reason the Hartmanns matter.",
+      "currentFidelity": "FRAGMENT",
+      "tags": ["INFRASTRUCTURE", "TRADE", "FOUNDING"],
+      "magnitude": 3,
+      "institutionRefs": ["inst_hartmann_mill", "inst_council"],
+      "poiRefs": [],
+      "locationRef": "river_crossing",
+      "causedBy": [],
+      "caused": ["sieve_council_founding"],
+      "embedding": null
+    },
+    {
+      "id": "sieve_council_founding",
+      "tick": -780,
+      "inWorldDate": "Circa 1027",
+      "description": "The three dominant families — Brenner, Kessler, and Hartmann — formalized their arrangement into a governing council following a season of disputes over market taxation and bridge toll revenues. The council presented itself to the population as unified civic governance. In practice it was, and remains, a negotiated ceasefire between three competing commercial interests.",
+      "summary": "The Council of Schafweide formed by the three guild families as a formalized power-sharing arrangement.",
+      "fragment": "The council was never unity. It was always a ceasefire.",
+      "currentFidelity": "FRAGMENT",
+      "tags": ["POLITICS", "FOUNDING", "LAW"],
+      "magnitude": 3,
+      "institutionRefs": ["inst_council", "inst_wool_guild", "inst_tanners_guild", "inst_hartmann_mill"],
+      "poiRefs": [],
+      "locationRef": "marktplatz",
+      "causedBy": ["sieve_wool_guild_founding", "sieve_river_crossing_built"],
+      "caused": [],
+      "embedding": null
+    },
+    {
+      "id": "sieve_press_arrival",
+      "tick": -26,
+      "inWorldDate": "October, 1466",
+      "description": "Heinrich Voss, a minor merchant with no guild affiliation, returned from Mainz with a printing press and established Der Weidenbote — The Pasture Messenger — in a rented ground-floor room on the east side of the Marktplatz. His first publication, a broadsheet reporting wool prices across four regional markets, sold out in an afternoon. The monastery has not yet decided how to respond. The Brenner family has already sent a representative to discuss arrangements.",
+      "summary": "Heinrich Voss established Der Weidenbote printing press on the Marktplatz. First broadsheet reported regional wool prices, immediately attracting guild and Church attention.",
+      "fragment": "The press arrived in October 1466. Nothing in Schafweide has been entirely the same since.",
+      "currentFidelity": "FULL",
+      "tags": ["PRESS", "FOUNDING", "TRADE", "RELIGION", "POLITICS", "DISCOVERY"],
+      "magnitude": 4,
+      "institutionRefs": ["inst_der_weidenbote", "inst_wool_guild", "inst_monastery", "inst_council"],
+      "poiRefs": ["poi_heinrich_voss"],
+      "locationRef": "marktplatz",
+      "causedBy": [],
+      "caused": [],
+      "embedding": null
+    }
+  ]
+}
