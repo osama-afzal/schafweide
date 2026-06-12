@@ -2,7 +2,7 @@
 // INSTITUTION TYPES
 // Institutions are the persistent, metric-bearing entities
 // of Schafweide. They outlive individuals. They can be
-// weakened, transformed, destroyed, or replaced — but they
+// weakened, transformed, destroyed, or replaced, but they
 // persist as entities even through radical change.
 // ============================================================
 

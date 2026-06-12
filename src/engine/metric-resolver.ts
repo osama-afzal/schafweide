@@ -9,7 +9,6 @@ import type { CityMetrics } from '../types';
 // ============================================================
 
 // All valid metric paths in the system.
-// If you add a metric to CityMetrics, add its path here.
 export const VALID_METRIC_PATHS = [
   'economic.grainSupply',
   'economic.tradeFlow',

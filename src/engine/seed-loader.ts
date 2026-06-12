@@ -14,7 +14,7 @@ import { DEFAULT_CONFIG } from './config';
 // SEED LOADER
 // Reads world.json and event-templates.json from data/seed/
 // and constructs the initial WorldState for Urwerk to operate on.
-// This runs exactly once — on engine startup.
+// This runs exactly once on engine startup.
 // ============================================================
 
 // Raw JSON shapes — intentionally loose since we validate below

@@ -4,7 +4,6 @@ import type { EngineConfig } from '../types';
 // URWERK ENGINE CONFIGURATION
 // These are the calibration knobs. All values are defaults
 // that will be tuned by watching the simulation run.
-// Do not treat these as final — treat them as hypotheses.
 // ============================================================
 
 export const DEFAULT_CONFIG: EngineConfig = {
