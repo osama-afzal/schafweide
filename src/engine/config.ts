@@ -4,6 +4,7 @@ import type { EngineConfig } from '../types';
 // URWERK ENGINE CONFIGURATION
 // These are the calibration knobs. All values are defaults
 // that will be tuned by watching the simulation run.
+// Do not treat these as final — treat them as hypotheses.
 // ============================================================
 
 export const DEFAULT_CONFIG: EngineConfig = {
@@ -35,7 +36,7 @@ export const DEFAULT_CONFIG: EngineConfig = {
   // Dice settings
   // Base chance of any event firing per tick — 40% per week
   // feels right for a town with existing tensions
-  baseEventProbability: 0.4,
+  baseEventProbability: 0.35,
 
   // Under severe metric stress, high-magnitude events get
   // this weight multiplier in the dice pool

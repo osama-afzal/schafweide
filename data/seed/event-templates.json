@@ -1,5 +1,6 @@
 {
   "templates": [
+
     {
       "id": "tmpl_wool_price_drop",
       "name": "Wool Price Decline",
@@ -311,6 +312,92 @@
       ],
       "requiresNamedActor": false,
       "cooldownTicks": 52,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_trade_route_recovery",
+      "name": "Merchants Return to the Thursday Market",
+      "description": "After a prolonged slump, traveling merchants begin returning to Schafweide's Thursday market — drawn by slightly improved road conditions, lower toll expectations, or simply a lack of better alternatives in the region. The Marktplatz is not busy, but it is no longer empty.",
+      "tags": ["TRADE", "HOPE"],
+      "magnitude": 3,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "economic.tradeFlow", "operator": "LT", "value": 25 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "economic.tradeFlow", "delta": 12, "propagationDelay": 0, "decayRate": 0.008 },
+        { "metricPath": "economic.woolMarketPrice", "delta": 4, "propagationDelay": 2, "decayRate": 0.01 },
+        { "metricPath": "social.publicUnrest", "delta": -3, "propagationDelay": 3, "decayRate": 0.02 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 16,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_labor_action",
+      "name": "Wool Workers Walk Out",
+      "description": "Seasonal wool workers, unpaid or underpaid amid the market slump, refuse to report to the Thursday sorting floor. The walkout is disorganized but effective. Bales pile up at the Marktplatz. The Brenner family is furious. Guild tension vents destructively — the pressure releases but the damage is real.",
+      "tags": ["LABOR", "GUILD", "TRADE", "GRIEVANCE", "CONFLICT"],
+      "magnitude": 3,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "economic.guildTension", "operator": "GT", "value": 70 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "economic.guildTension", "delta": -18, "propagationDelay": 0, "decayRate": 0.003 },
+        { "metricPath": "economic.tradeFlow", "delta": -8, "propagationDelay": 1, "decayRate": 0.01 },
+        { "metricPath": "social.publicUnrest", "delta": 10, "propagationDelay": 1, "decayRate": 0.015 },
+        { "metricPath": "political.councilLegitimacy", "delta": -6, "propagationDelay": 2, "decayRate": 0.01 },
+        { "metricPath": "economic.woolMarketPrice", "delta": -5, "propagationDelay": 2, "decayRate": 0.008 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 30,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_press_defies_church",
+      "name": "Der Weidenbote Publishes Against Church Counsel",
+      "description": "Despite pressure from the monastery, Voss publishes a broadsheet that obliquely challenges the Church's interference in commercial affairs — framed as civic reporting, but unmistakably pointed. The brothers on the hill are not amused. The artisan class that can read it passes it hand to hand.",
+      "tags": ["PRESS", "RELIGION", "POLITICS", "CONFLICT", "PRIDE"],
+      "magnitude": 3,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "political.churchInfluence", "operator": "GT", "value": 70 },
+        { "metricPath": "social.informationSpread", "operator": "GT", "value": 18 },
+        { "metricPath": "infrastructure.pressOperationalStatus", "operator": "GT", "value": 40 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "political.churchInfluence", "delta": -8, "propagationDelay": 2, "decayRate": 0.008 },
+        { "metricPath": "social.informationSpread", "delta": 7, "propagationDelay": 1, "decayRate": 0.01 },
+        { "metricPath": "social.literacyRate", "delta": 1, "propagationDelay": 8, "decayRate": 0 },
+        { "metricPath": "infrastructure.pressOperationalStatus", "delta": -5, "propagationDelay": 3, "decayRate": 0.005 },
+        { "metricPath": "political.councilLegitimacy", "delta": 4, "propagationDelay": 4, "decayRate": 0.01 }
+      ],
+      "requiresNamedActor": true,
+      "cooldownTicks": 24,
+      "lastFiredTick": null
+    },
+
+    {
+      "id": "tmpl_council_legitimacy_recovery",
+      "name": "Council Makes Public Concession",
+      "description": "Under pressure from multiple directions, one of the council families makes a visible public concession — reducing a market fee, funding a road repair, or publicly mediating a minor dispute. It is calculated politics, not generosity. But the population notices, and legitimacy recovers slightly.",
+      "tags": ["POLITICS", "LAW", "HOPE"],
+      "magnitude": 2,
+      "origin": "THRESHOLD",
+      "conditions": [
+        { "metricPath": "political.councilLegitimacy", "operator": "LT", "value": 40 }
+      ],
+      "baseImpacts": [
+        { "metricPath": "political.councilLegitimacy", "delta": 10, "propagationDelay": 0, "decayRate": 0.005 },
+        { "metricPath": "social.publicUnrest", "delta": -5, "propagationDelay": 2, "decayRate": 0.02 },
+        { "metricPath": "economic.guildTension", "delta": -4, "propagationDelay": 3, "decayRate": 0.01 }
+      ],
+      "requiresNamedActor": false,
+      "cooldownTicks": 20,
       "lastFiredTick": null
     }
   ]

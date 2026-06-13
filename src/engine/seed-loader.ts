@@ -139,8 +139,9 @@ export function tickToDate(tick: number, startYear: number, startWeek: number): 
   const week = ((totalWeeks % 52) + 52) % 52 || 52;
   const monthIndex = Math.floor((week - 1) / 4.33);
   const month = MONTH_NAMES[Math.min(monthIndex, 11)];
+  const weekOfMonth = ((week - 1) % Math.ceil(52 / 12)) + 1;
   return {
-    date: `${month}, ${year}`,
+    date: `Week ${weekOfMonth}, ${month}, ${year}`,
     year,
     week,
   };
