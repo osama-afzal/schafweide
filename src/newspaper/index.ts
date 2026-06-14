@@ -3,13 +3,15 @@ import { selectEditionContent } from './selector';
 import { buildSystemPrompt, buildUserPrompt } from './prompt-builder';
 import { checkOllamaHealth, checkModelAvailable, ollamaChat } from './ollama-client';
 import { renderNewspaper } from './renderer';
+import { saveEdition } from '../database';
+import { readFileSync } from 'fs';
 
 // ============================================================
 // NEWSPAPER ORCHESTRATOR
 // The single public function the rest of the system calls.
 // Wires together: selection -> prompting -> generation -> render
 //
-// Called after a simulation run to produce a newspaper
+// Call this after a simulation run to produce a newspaper
 // edition covering the most recent events.
 // ============================================================
 
@@ -78,6 +80,18 @@ export async function publishEdition(
 
   // Step 6 — render and write
   const filepath = renderNewspaper(llmOutput, state, selection);
+
+  // Read the written markdown content for DB storage
+  let markdownContent = '';
+  try {
+    markdownContent = readFileSync(filepath, 'utf-8');
+  } catch { /* non-fatal */ }
+
+  // Record edition in database
+  const filename = filepath.split(/[\\/]/).pop() ?? filepath;
+  await saveEdition(state, selection, filename, markdownContent).catch(err =>
+    console.warn(`[Newspaper] DB record failed: ${err}`)
+  );
 
   console.log(`[Newspaper] Edition complete: ${filepath}`);
   return filepath;

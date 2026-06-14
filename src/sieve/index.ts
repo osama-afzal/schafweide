@@ -6,6 +6,7 @@ import type {
   FidelityLevel,
 } from '../types';
 import { DEFAULT_CONFIG } from '../engine/config';
+import { upsertSieveEntry } from '../database';
 
 // ============================================================
 // SIEVE WRITER
@@ -235,6 +236,11 @@ export function writeSieveEntry(
   // Append new entry and trim hot cache to configured size
   const newEntries = [...updatedEntries, entry]
     .slice(-DEFAULT_CONFIG.sieveHotCacheSize);
+
+  // Persist to database asynchronously — don't block the tick loop
+  upsertSieveEntry(entry).catch(err =>
+    console.warn(`[Sieve] DB write failed for ${id}: ${err}`)
+  );
 
   console.log(
     `[Sieve] Entry written: "${event.title}" ` +
