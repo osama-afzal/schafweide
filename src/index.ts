@@ -2,6 +2,7 @@ import { loadSeedData } from './engine/seed-loader';
 import { computeStressScore } from './engine/metric-resolver';
 import { run } from './engine/urwerk';
 import { logSieveSummary } from './sieve';
+import { publishEdition } from './newspaper';
 
 const state = loadSeedData();
 
@@ -17,3 +18,7 @@ console.log(`[Urwerk] Active events: ${finalState.activeEvents.length}`);
 console.log(`[Urwerk] Pending impacts: ${finalState.pendingImpacts.length}`);
 
 logSieveSummary(finalState);
+
+// Publish a newspaper edition covering the full simulation run
+console.log('\n[Urwerk] Publishing Der Weidenbote...');
+await publishEdition(finalState);
